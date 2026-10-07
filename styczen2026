@@ -1,0 +1,23 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ConsoleApp1
+{
+    public class Kosc
+
+    {
+        public static int liczbaInstancji = 0;
+        public string[] pliki = { "kosc0.png", "kosc1.png", "kosc2.png", "kosc3.png", "kosc4.png", "kosc5.png", "kosc6.png" };
+        public int liczbaOczek = 0;
+        public int id = 0;
+        public bool czyDostepna = true;
+        public Kosc(int liczbaOczek) { 
+        }
+        public Kosc()
+        {
+            Random random = new Random();
+        }
+    }
+
+}
