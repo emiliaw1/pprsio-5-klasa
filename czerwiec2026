@@ -1,0 +1,38 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ConsoleApp1
+{
+    internal class czerwiec2026
+    {
+        private static readonly string maleLitery = "abcdefghijklmnopqrstuvwxyz";
+        private static readonly string wielkieLitery = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private static readonly string znakiDiakrytyczne = "ąęłńóśźżĄĘŁŃÓŚŹŻ";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+}
