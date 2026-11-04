@@ -1,0 +1,81 @@
+
+using System;
+
+class Program
+{
+    static Random random = new Random();
+
+    static int[] RzucKostkami(int liczbaKostek)
+    {
+        int[] wyniki = new int[liczbaKostek];
+
+        for (int i = 0; i < liczbaKostek; i++)
+        {
+            wyniki[i] = random.Next(1, 7);
+        }
+
+        return wyniki;
+    }
+
+    static int ObliczPunkty(int[] wyniki)
+    {
+        int punkty = 0;
+
+        for (int i = 1; i <= 6; i++)
+        {
+            int licznik = 0;
+
+            for (int j = 0; j < wyniki.Length; j++)
+            {
+                if (wyniki[j] == i)
+                {
+                    licznik++;
+                }
+            }
+
+            if (licznik >= 2)
+            {
+                punkty += i * licznik;
+            }
+        }
+
+        return punkty;
+    }
+
+    static void Main()
+    {
+        char powtorz;
+
+        do
+        {
+            int liczbaKostek;
+
+            do
+            {
+                Console.Write("Podaj liczbe kostek do rzucenia (od 3 do 10): ");
+                liczbaKostek = int.Parse(Console.ReadLine());
+
+            } while (liczbaKostek < 3 || liczbaKostek > 10);
+
+            int[] wyniki = RzucKostkami(liczbaKostek);
+
+            Console.WriteLine("\nWyniki rzutu:");
+
+            for (int i = 0; i < wyniki.Length; i++)
+            {
+                Console.WriteLine("Kostka " + (i + 1) + ": " + wyniki[i]);
+            }
+
+            int punkty = ObliczPunkty(wyniki);
+
+            Console.WriteLine("\nLiczba zdobytych punktow: " + punkty);
+
+            Console.Write("\nCzy powtorzyc gre? (t/n): ");
+            powtorz = char.ToLower(Console.ReadKey().KeyChar);
+            Console.WriteLine("\n");
+
+        } while (powtorz == 't');
+
+        Console.WriteLine("Koniec gry.");
+    }
+}
