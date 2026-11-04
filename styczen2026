@@ -1,23 +1,100 @@
+
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace ConsoleApp1
+class Kosc
 {
-    public class Kosc
+    public static int liczbaInstancji = 0;
 
+    public string[] pliki = {
+        "kosc0.png",
+        "kosc1.png",
+        "kosc2.png",
+        "kosc3.png",
+        "kosc4.png",
+        "kosc5.png",
+        "kosc6.png"
+    };
+
+    public int liczbaOczek;
+    public int idPliku;
+    public bool dostepna;
+
+    static Random random = new Random();
+
+    public Kosc(int wartosc)
     {
-        public static int liczbaInstancji = 0;
-        public string[] pliki = { "kosc0.png", "kosc1.png", "kosc2.png", "kosc3.png", "kosc4.png", "kosc5.png", "kosc6.png" };
-        public int liczbaOczek = 0;
-        public int id = 0;
-        public bool czyDostepna = true;
-        public Kosc(int liczbaOczek) { 
-        }
-        public Kosc()
+        if (wartosc < 1 || wartosc > 6)
+            wartosc = 0;
+
+        liczbaOczek = wartosc;
+        idPliku = wartosc;
+        dostepna = true;
+
+        liczbaInstancji++;
+    }
+
+    public Kosc()
+    {
+        liczbaOczek = random.Next(1, 7);
+        idPliku = liczbaOczek;
+        dostepna = true;
+
+        liczbaInstancji++;
+    }
+
+    public void Rzut()
+    {
+        if (dostepna)
         {
-            Random random = new Random();
+            liczbaOczek = random.Next(1, 7);
+            idPliku = liczbaOczek;
         }
     }
 
+    public void Zablokuj()
+    {
+        dostepna = false;
+    }
+
+    public string NaTekst()
+    {
+        switch (liczbaOczek)
+        {
+            case 0: return "zero";
+            case 1: return "jeden";
+            case 2: return "dwa";
+            case 3: return "trzy";
+            case 4: return "cztery";
+            case 5: return "piec";
+            case 6: return "szesc";
+            default: return "nieznana wartosc";
+        }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Podaj liczbe oczek dla pierwszej kosci (1-6): ");
+        int wartosc = int.Parse(Console.ReadLine());
+
+        Kosc k1 = new Kosc(wartosc);
+
+        Console.WriteLine("\nPierwsza kosc:");
+        Console.WriteLine("Liczba instancji: " + Kosc.liczbaInstancji);
+        Console.WriteLine("Liczba oczek: " + k1.liczbaOczek);
+        Console.WriteLine("Liczba oczek slownie: " + k1.NaTekst());
+        Console.WriteLine("Plik graficzny: " + k1.pliki[k1.idPliku]);
+
+        Kosc k2 = new Kosc();
+
+        Console.WriteLine("\nDruga kosc:");
+        Console.WriteLine("Liczba instancji: " + Kosc.liczbaInstancji);
+        Console.WriteLine("Liczba oczek: " + k2.liczbaOczek);
+        Console.WriteLine("Liczba oczek slownie: " + k2.NaTekst());
+        Console.WriteLine("Plik graficzny: " + k2.pliki[k2.idPliku]);
+
+        Console.ReadKey();
+    }
 }
