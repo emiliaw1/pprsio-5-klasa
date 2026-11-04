@@ -1,0 +1,97 @@
+
+using System;
+
+class Tablica
+{
+    private int[] tab;
+    private int liczbaElementow;
+
+    static Random random = new Random();
+
+    public Tablica(int rozmiar)
+    {
+        liczbaElementow = rozmiar;
+        tab = new int[liczbaElementow];
+
+        for (int i = 0; i < liczbaElementow; i++)
+        {
+            tab[i] = random.Next(1, 1001);
+        }
+    }
+
+    public void Wyswietl()
+    {
+        for (int i = 0; i < liczbaElementow; i++)
+        {
+            Console.WriteLine(i + ": " + tab[i]);
+        }
+    }
+
+    public int Wyszukaj(int wartosc)
+    {
+        for (int i = 0; i < liczbaElementow; i++)
+        {
+            if (tab[i] == wartosc)
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public int WyswietlNieparzyste()
+    {
+        int licznik = 0;
+
+        for (int i = 0; i < liczbaElementow; i++)
+        {
+            if (tab[i] % 2 != 0)
+            {
+                Console.WriteLine(tab[i]);
+                licznik++;
+            }
+        }
+
+        return licznik;
+    }
+
+    public double Srednia()
+    {
+        int suma = 0;
+
+        for (int i = 0; i < liczbaElementow; i++)
+        {
+            suma += tab[i];
+        }
+
+        return (double)suma / liczbaElementow;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Tablica t = new Tablica(25);
+
+        Console.WriteLine("Elementy tablicy:");
+        t.Wyswietl();
+
+        int indeks = t.Wyszukaj(500);
+
+        if (indeks != -1)
+        {
+            Console.WriteLine("Wyszukana wartosc znajduje sie pod indeksem: " + indeks);
+        }
+
+        Console.WriteLine("\nLiczby nieparzyste:");
+        int liczbaNieparzystych = t.WyswietlNieparzyste();
+
+        Console.WriteLine("Liczba elementow nieparzystych: " + liczbaNieparzystych);
+
+        Console.WriteLine("\nSrednia arytmetyczna: " + t.Srednia());
+
+        Console.ReadKey();
+    }
+}
