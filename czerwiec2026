@@ -1,38 +1,54 @@
+
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace ConsoleApp1
+class Program
 {
-    internal class czerwiec2026
+    static Random random = new Random();
+
+    static string GenerujHaslo()
     {
-        private static readonly string maleLitery = "abcdefghijklmnopqrstuvwxyz";
-        private static readonly string wielkieLitery = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private static readonly string znakiDiakrytyczne = "ąęłńóśźżĄĘŁŃÓŚŹŻ";
+        string male = "abcdefghijklmnopqrstuvwxyz";
+        string duze = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        string polskie = "ąęłńóśżźĄĘŁŃÓŚŻŹ";
+        string cyfry = "0123456789";
+        string specjalne = "!@#$%^&*()_+";
 
+        string haslo = "";
 
+        for (int i = 0; i < 3; i++)
+            haslo += male[random.Next(male.Length)];
 
+        for (int i = 0; i < 3; i++)
+            haslo += duze[random.Next(duze.Length)];
 
+        for (int i = 0; i < 2; i++)
+            haslo += polskie[random.Next(polskie.Length)];
 
+        for (int i = 0; i < 2; i++)
+            haslo += cyfry[random.Next(cyfry.Length)];
 
+        for (int i = 0; i < 2; i++)
+            haslo += specjalne[random.Next(specjalne.Length)];
 
+        char[] znaki = haslo.ToCharArray();
 
+        for (int i = 0; i < znaki.Length; i++)
+        {
+            int indeks = random.Next(znaki.Length);
 
+            char temp = znaki[i];
+            znaki[i] = znaki[indeks];
+            znaki[indeks] = temp;
+        }
 
+        return new string(znaki);
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    static void Main()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            Console.WriteLine("Wygenerowane haslo: " + GenerujHaslo());
+        }
     }
 }
